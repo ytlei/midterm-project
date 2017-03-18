@@ -25,7 +25,7 @@ class carControl {
 	public:
 		
 		double getSpeed();
-		void setSpeed();
+		void setSpeed(double);
 		void accelerate();
 		void brake();
 	
