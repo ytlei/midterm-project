@@ -19,6 +19,10 @@
 
 
 void lqrControl::convertStateSpace() {  ///< set the pid parameters
+	m = 1000; ///<set car mass = 1000kg
+	b = 50; ///<b = 50Nsec/m
+	u = 500; ///<u = 500N
+
 	A = -b/m;
 	B = 1/m;
 	C = 1;
@@ -28,6 +32,6 @@ void lqrControl::convertStateSpace() {  ///< set the pid parameters
 double lqrControl::lqr(double v, double u) {  ///< show current velocity
 	dv = A*v + B*u;
 	y = C*v;
-	return y;
+	return y; ///<algorithm not finished, dummy output
 }
 

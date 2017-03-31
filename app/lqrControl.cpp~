@@ -18,9 +18,20 @@
 #include <lqrControl.hpp>
 
 
-bool lqrControl::convertStateSpace() {  ///< set the pid parameters
+void lqrControl::convertStateSpace() {  ///< set the pid parameters
+	m = 1000; ///<set car mass = 1000kg
+	b = 50; ///<b = 50Nsec/m
+	u = 500; ///<u = 500N
+
+	A = -b/m;
+	B = 1/m;
+	C = 1;
+	D = 0;	
 }
 
-double lqrControl::lqr(double, double, double) {  ///< show current velocity
+double lqrControl::lqr(double v, double u) {  ///< show current velocity
+	dv = A*v + B*u;
+	y = C*v;
+	return y;
 }
 
