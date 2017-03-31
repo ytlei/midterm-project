@@ -9,6 +9,6 @@ int main()
     	lqrControl LQR;
 	LQR.convertStateSpace();
 	double speed = LQR.lqr(60,500);
-	cout << "the speed is: "<< speed << endl;
+	std::cout << "the speed is: "<< speed << std::endl;
     	return 0;
 }

@@ -1,14 +1,14 @@
 #include <iostream>
 #include <AnalogSensor.hpp>
+#include <lqrControl.hpp>
+#include <carControl.hpp>
+
 
 int main()
 {
-    AnalogSensor lightSensor(5);
-    std::cout << "Averaged sensor reading: " << lightSensor.Read() << std::endl;
-    bool terminator;
-    if( terminator )
-    {
-        std::cout << "DONE" << std::endl;
-    }
-    return 0;
+    	lqrControl LQR;
+	LQR.convertStateSpace();
+	double speed = LQR.lqr(60,500);
+	cout << "the speed is: "<< speed << endl;
+    	return 0;
 }

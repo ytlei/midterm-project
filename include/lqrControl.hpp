@@ -18,7 +18,7 @@
 #ifndef INCLUDE_LQRCONTROL_HPP_
 #define INCLUDE_LQRCONTROL_HPP_
 
-class PidController {
+class lqrControl {
 		double v, y, dv; ///<velocity and output
 		double m; ///<car mass
 		double b; ///<drag
@@ -29,5 +29,23 @@ class PidController {
 		void convertStateSpace() ; 	///< set the pid parameters
 		double lqr(double, double) ;	///< show current velocity
 };
+
+
+void lqrControl::convertStateSpace() {  ///< set the pid parameters
+	m = 1000; ///<set car mass = 1000kg
+	b = 50; ///<b = 50Nsec/m
+	u = 500; ///<u = 500N
+
+	A = -b/m;
+	B = 1/m;
+	C = 1;
+	D = 0;	
+}
+
+double lqrControl::lqr(double v, double u) {  ///< show current velocity
+	dv = A*v + B*u;
+	y = C*v;
+	return y; ///<algorithm not finished, dummy output
+}
 
 #endif

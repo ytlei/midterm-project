@@ -31,4 +31,22 @@ class carControl {
 	
 };
 
+
+double carControl::getSpeed(){
+	return speed;
+}
+
+void carControl::setSpeed(double speedSet){
+	speed = speedSet;
+}
+		
+
+void carControl::accelerate(){
+	speed += 1;
+}
+		
+void carControl::brake(){
+	speed -= 1;
+}
+
 #endif
