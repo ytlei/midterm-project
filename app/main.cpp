@@ -1,4 +1,18 @@
+/************************************************************
+ *                                                          *
+ * Copyright (C) 2017 by Yi-ting Lei                        *
+ *                                                          *
+ ***********************************************************/
 
+/**
+ *   @file	main.cpp
+ *   @brief  	This is the main file to run the acc controller
+ *      
+ *   randomly generate speed for first car and us the acc control to make following car catch up the speed
+ *
+ *   @author	Yi-ting Lei
+ *   @date	2017/3/17
+ */
 #include "cruiseController.h"
 #include "accController.h"
 #include "car.cpp"
@@ -18,46 +32,36 @@ double simTickResolutionSeconds = .01;
 
 std::mutex coutMutex;
 
-void handleSignal(int s)
-{
-	std::lock_guard<std::mutex> lock(coutMutex);
-	quit = true;
+void handleSignal(int s) {
+   std::lock_guard<std::mutex> lock(coutMutex);
+   quit = true;
 }
 
-void sleepSim(double seconds)
-{
-	std::this_thread::sleep_for
-	(
-		std::chrono::milliseconds((int)(1000*seconds))
+void sleepSim(double seconds) {
+	std::this_thread::sleep_for (
+	   std::chrono::milliseconds((int)(1000*seconds))
 	);
 }
 
-void runPv(pidController* controller)
-{
-	while (!quit)
-	{
+void runPv(pidController* controller) {
+	while (!quit) {
 		controller->pvTick();
 		sleepSim(pvTickResolutionSeconds);
 	}
 }
 
-void runPid(pidController* controller)
-{
-	while (!quit)
-	{
-
-		controller->pidTick(pidTickResolutionSeconds);
-		sleepSim(pidTickResolutionSeconds);
+void runPid(pidController* controller) {
+	while (!quit) {
+             controller->pidTick(pidTickResolutionSeconds);
+             sleepSim(pidTickResolutionSeconds);
 	}
 }
 
-void runSim(car* lead, car* follower, pidController* controller)
-{
+void runSim(car* lead, car* follower, pidController* controller) {
 	double t = 0;
 
 	std::cout << "time, lead distance, setpoint, PV, integral, derivative, error\n";
-	while (!quit)
-	{
+	while (!quit) {
 		t += simTickResolutionSeconds;
 
 		std::string delim = ", ";
@@ -82,8 +86,7 @@ void runSim(car* lead, car* follower, pidController* controller)
 	}
 }
 
-int main()
-{
+int main() {
 	// Handle CTLR + C
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = handleSignal;
@@ -109,10 +112,9 @@ int main()
 
 	std::random_device rd;     // only used once to initialise (seed) engine
 	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
-	std::uniform_int_distribution<int> uni(0,4); // guaranteed unbiased
+	std::uniform_int_distribution<int> uni(0, 4); // guaranteed unbiased
 
-	while (!quit)
-	{
+	while (!quit) {
 		int randomSpeed = uni(rng);
 
 		lead->setSpeed(randomSpeed);

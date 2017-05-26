@@ -15,6 +15,11 @@ https://docs.google.com/spreadsheets/d/1zvV9tH2fySRXZiNTsEiNcHox-10YE9jk1I9JvUUO
 UML class/activity diagrams can be found in git under ./UML folder.
 
 
+## Status
+
+Originally planned to build on LQR control, but it's too hard to implement. Thus using pid as an alternative. Used slater1 AdaptiveCruiseControl for reference.
+still not finished
+
 
 ## License
 
@@ -44,7 +49,7 @@ SOFTWARE.
 
 ## Dependencies
 
-None
+the controller is based on https://github.com/slater1/AdaptiveCruiseControl.git
 
 
 ## How to build

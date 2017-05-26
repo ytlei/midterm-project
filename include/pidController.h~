@@ -1,23 +1,9 @@
-/************************************************************
- *                                                          *
- * Copyright (C) 2017 by Yi-ting Lei                        *
- *                                                          *
- ***********************************************************/
-
-/**
- *   @file	car.cpp
- *   @brief  	This is the file for pid controller
- *      
- *   referenced from slater1
- *
- *   @author	Yi-ting Lei
- *   @date	2017/5/22
- */
-
-
-
 #pragma once
 
+// Sources
+// http://www.codeproject.com/Articles/36459/PID-process-control-a-Cruise-Control-example
+// http://itech.fgcu.edu/faculty/zalewski/cda4170/files/pidcontrol.pdf
+// http://www.cse.iitb.ac.in/~erts/car/documents/presentations/ashish-stage1.pdf
 class pidController {
 
    public:
